@@ -1,0 +1,219 @@
+//COLORS
+$white: #ffffff;
+$accent: #f7654a;
+$gray: #999999;
+$darkgray: #404149;
+
+// FONTS
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Oswald:wght@500;700&display=swap");
+
+$fontfamily_oswald: "Oswald";
+$font-family_open: "Open Sans";
+
+$fontweight: (
+   regular: 400,
+   medium: 500,
+   bold: 700,
+);
+
+$fontsize: (
+   h1: 64px,
+   h2: 48px,
+   h3: 36px,
+   h4: 24px,
+   h5: 21px,
+   textbig: 18px,
+   textplus: 16px,
+   text: 14px,
+);
+
+$texttransform: (
+   none: none,
+   cap: capitalize,
+   upper: uppercase,
+);
+
+// Nixit for font style
+@mixin fontstyle($fw, $fs, $tt) {
+   @if map-has-key($fontweight, $fw) {
+      font-weight: #{map-get($fontweight, $fw)};
+   } @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$fw}`. "
+         + "Please make sure it is defined in `$breakpoints` map.";
+   }
+   @if map-has-key($fontsize, $fs) {
+      font-size: #{map-get($fontsize, $fs)};
+   } @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$fs}`. "
+         + "Please make sure it is defined in `$breakpoints` map.";
+   }
+   @if map-has-key($texttransform, $tt) {
+      text-transform: #{map-get($texttransform, $tt)};
+   } @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$tt}`. "
+         + "Please make sure it is defined in `$breakpoints` map.";
+   }
+}
+
+// Example
+
+//  .featur-item__h4 {
+//    @include fontstyle(semibold, h4, cap);
+// }
+
+// .featur-item__text {
+//    @include fontstyle(regular, 0, cap);
+//    font-size: 15px;
+// }
+// .featur-item {
+//    @each $font, $size in $fontsize {
+// &__#{$font} {
+//          font-size: $size;
+//       }
+//    }
+// }
+
+// MEDIA
+// $level_1: 1170px;
+// $level_2: 1100px;
+// $level_3: 1000px;
+// $level_4: 900px;
+// $level_5: 800px;
+// $level_6: 700px;
+// $level_7: 600px;
+$level_8: 450px;
+$level_9: 374px;
+
+// WIDTH
+$desktopwidth: 1110px;
+
+.container {
+   max-width: $desktopwidth + 30px;
+   margin: 0 auto;
+   padding: 0 15px;
+   @media (max-width: $level_8) {
+      padding: 0 8px;
+   }
+}
+
+section,
+article,
+header,
+main,
+footer,
+aside {
+   display: block;
+}
+
+body {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   font-family: $fontfamily_oswald;
+   min-width: $level_9;
+   min-height: 100vh;
+}
+
+.main {
+   flex-grow: 1;
+}
+
+.h1 {
+   @include fontstyle(medium, h1, upper);
+   color: $white;
+   line-height: 95px;
+   letter-spacing: 2px;
+}
+.h2 {
+   @include fontstyle(bold, h2, upper);
+   color: $white;
+   line-height: 72px;
+}
+.h3 {
+   @include fontstyle(medium, h3, upper);
+   color: $darkgray;
+   line-height: 54px;
+   text-align: center;
+   margin-bottom: 60px;
+}
+.h4 {
+   @include fontstyle(medium, h4, upper);
+   line-height: 34px;
+   color: $darkgray;
+   margin: 15px 0 20px;
+}
+.h5 {
+   @include fontstyle(medium, h5, upper);
+   line-height: 31px;
+   letter-spacing: 0.02em;
+}
+.textplus {
+   @include fontstyle(regular, textplus, none);
+   font-family: $font-family_open;
+   line-height: 22px;
+   color: $gray;
+}
+.text {
+   @include fontstyle(regular, text, none);
+   font-family: $font-family_open;
+   line-height: 21px;
+   color: $gray;
+}
+
+// HOVER
+@media (min-width: 678px) {
+   //----------- Header
+   .h4-burger-hover:hover {
+      text-decoration: underline;
+   }
+   /* hover menu burger */
+   #menu__toggle:checked ~ .header__nav-box {
+      visibility: visible;
+   }
+   /* menu burger EXIT*/
+
+   //----------- Project
+
+   //Polsunok
+   .project__card:hover input[type="range"]::-webkit-slider-thumb {
+      box-shadow: 2px 2px 18px rgb(221, 113, 113);
+      transition: 0.1s linear;
+   }
+
+   //----------- Reviews
+   .reviews__wrapp-text:hover {
+      background: rgb(255, 241, 241);
+      box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.3);
+      transform: scale(1.8);
+      transition: scale, 0.2s linear;
+   }
+
+   //----------- Request
+   .btn-hover {
+      transition: 0.1s linear;
+   }
+   .btn-hover:hover {
+      background: white;
+      color: $accent;
+      transform: scale(1.1);
+      transition: 0.1s linear;
+      path {
+         fill: $accent;
+      }
+   }
+
+   //----------- Portfolio
+   .fa-chevron:hover {
+      color: white;
+      transition: 0.2s linear;
+   }
+
+   //-----------  Footer
+   .h4-container-hover:hover {
+      color: $accent;
+   }
+   .contacts__wrapp-img:hover {
+      transform: scale(1.5);
+      transition: 0.1s linear;
+   }
+}
